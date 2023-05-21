@@ -25,29 +25,6 @@ public final class Knight extends Piece {
         super(piecePosition, pieceColor, PieceType.KNIGHT, isFirstMove);
     }
 
-    /*
-     * @Override
-     * public Collection<Move> calculateLegalMoves(final Board board) {
-     * final List<Move> legalMoves = new ArrayList<>();
-     * for (final int candidateDestinationCoordinate :
-     * PRECOMPUTED_CANDIDATES.get(this.piecePosition)) {
-     * final Piece pieceAtDestination =
-     * board.getPiece(candidateDestinationCoordinate);
-     * if (pieceAtDestination == null) {
-     * legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
-     * } else {
-     * final Alliance pieceAtDestinationAllegiance =
-     * pieceAtDestination.getPieceAllegiance();
-     * if (this.pieceAlliance != pieceAtDestinationAllegiance) {
-     * legalMoves.add(new MajorAttackMove(board, this,
-     * candidateDestinationCoordinate,
-     * pieceAtDestination));
-     * }
-     * }
-     * }
-     * return Collections.unmodifiableList(legalMoves);
-     * }
-     */
     @Override
     public List<Move> calcLegalMoves(Board board) {
 
@@ -82,24 +59,8 @@ public final class Knight extends Piece {
                 }
             }
         }
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
         return legalMoves;
     }
-
-    /*
-     * @Override
-     * public int locationBonus() {
-     * return this.pieceAlliance.knightBonus(this.piecePosition);
-     * }
-     * 
-     * @Override
-     * public Knight movePiece(final Move move) {
-     * return
-     * PieceUtils.INSTANCE.getMovedKnight(move.getMovedPiece().getPieceAllegiance(),
-     * move.getDestinationCoordinate());
-     * }
-     */
 
     @Override
     public String toString() {
