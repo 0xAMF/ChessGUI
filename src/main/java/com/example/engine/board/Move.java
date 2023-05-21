@@ -1,9 +1,9 @@
-package com.example.chessgui.board;
+package com.example.engine.board;
 
-import com.example.chessgui.board.Board.Builder;
-import com.example.chessgui.pieces.Pawn;
-import com.example.chessgui.pieces.Piece;
-import com.example.chessgui.pieces.Rook;
+import com.example.engine.board.Board.Builder;
+import com.example.engine.pieces.Pawn;
+import com.example.engine.pieces.Piece;
+import com.example.engine.pieces.Rook;
 
 public abstract class Move {
     final Board board;
@@ -244,9 +244,6 @@ public abstract class Move {
     }
     
     public static class MoveFactory{
-        /*private MoveFactory(){
-            throw new RuntimeException("Not instantiable");
-        }*/
         public static Move createMove(final Board board, final int currentCoordinate, final int destinationCoordinate){
             for(final Move move : board.getAllLegalMoves()){
                 if(move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate){

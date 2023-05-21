@@ -1,11 +1,10 @@
-package com.example.chessgui.pieces;
+package com.example.engine.pieces;
 
-import com.example.chessgui.PieceColor;
-import com.example.chessgui.board.Board;
-import com.example.chessgui.board.BoardStructure;
-import com.example.chessgui.board.Move;
-import com.example.chessgui.board.Tile;
-import javafx.scene.image.Image;
+import com.example.engine.PieceColor;
+import com.example.engine.board.Board;
+import com.example.engine.board.BoardStructure;
+import com.example.engine.board.Move;
+import com.example.engine.board.Tile;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -136,8 +135,6 @@ public final class King extends Piece {
                         (candidateOffset == 9));
     }
 
-    
-    //555555555555555rrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     @Override
     public Piece movePiece(Move move) {
         return new King(move.getMovedPiece().pieceColor, move.getDestinationCoordinate(), false, false);

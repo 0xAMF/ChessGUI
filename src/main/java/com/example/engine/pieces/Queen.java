@@ -1,39 +1,32 @@
-package com.example.chessgui.pieces;
+package com.example.engine.pieces;
 
-import com.example.chessgui.PieceColor;
-import com.example.chessgui.board.Board;
-import com.example.chessgui.board.BoardStructure;
-import com.example.chessgui.board.Move;
-import com.example.chessgui.board.Tile;
+import com.example.engine.PieceColor;
+import com.example.engine.board.Board;
+import com.example.engine.board.BoardStructure;
+import com.example.engine.board.Move;
+import com.example.engine.board.Tile;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Rook extends Piece {
+public class Queen extends Piece {
+    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
 
-    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -8, -1, 1, 8 };
-
-    public Rook(final PieceColor pieceColor, final int piecePosition) {
-        super(piecePosition, pieceColor, PieceType.ROOK, true);
-    }
-
-    public Rook(final PieceColor pieceColor,
-            final int piecePosition,
-            final boolean isFirstMove) {
-        super(piecePosition, pieceColor, PieceType.ROOK, isFirstMove);
+    public Queen(final PieceColor pieceColor, final int piecePosition) {
+        super(piecePosition, pieceColor, PieceType.QUEEN, false);
     }
 
     @Override
     public List<Move> calcLegalMoves(Board board) {
-
         final List<Move> legalMoves = new ArrayList<>();
 
         for (final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
             int candidateDestinationCoordinate = this.piecePosition;
 
             while (BoardStructure.isValidCoordinate(candidateDestinationCoordinate)) {
-                if (isColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
+                if (isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
+                        isEightColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
                     break;
                 }
                 candidateDestinationCoordinate += candidateCoordinateOffset;
@@ -59,31 +52,35 @@ public final class Rook extends Piece {
         // body of generated methods, choose Tools | Templates.
         return legalMoves;
     }
-
-    @Override
-    public String toString() {
-        return this.pieceType.toString();
-    }
-
-    private static boolean isColumnExclusion(final int position,
-            final int offset) {
-        return (BoardStructure.FIRST_COLUMN[position] && (offset == -1)) ||
-                (BoardStructure.EIGHTH_COLUMN[position] && (offset == 1));
-    }
     
+    private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset) {
+        return BoardStructure.FIRST_COLUMN[currentPosition]
+                && (candidateOffset == -1 || candidateOffset == -9 || candidateOffset == 7);
+    }
+
+    private static boolean isEightColumnExclusion(final int currentPosition, final int candidateOffset) {
+        return BoardStructure.EIGHTH_COLUMN[currentPosition]
+                && (candidateOffset == 1 || candidateOffset == -7 || candidateOffset == 9);
+    }
+
     @Override
-    public Rook movePiece(final Move move) {
-        return new Rook( move.getMovedPiece().getPieceColor(), move.getDestinationCoordinate());
+    public Queen movePiece(final Move move) {
+        return new Queen( move.getMovedPiece().getPieceColor(), move.getDestinationCoordinate());
     }
 
     @Override
     public ImageView getPieceIcon() {
-        if (this.getPieceColor() == PieceColor.BLACK) {
-            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\blackRook.png");
+        if (this.getPieceColor() == pieceColor.BLACK) {
+            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\blackQueen.png");
         }
         else {
-            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\whiteRook.png");
+            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\whiteQueen.png");
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.pieceType.toString();
     }
 
 }

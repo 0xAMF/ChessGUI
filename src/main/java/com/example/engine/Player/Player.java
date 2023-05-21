@@ -1,10 +1,10 @@
-package com.example.chessgui.Player;
+package com.example.engine.Player;
 
-import com.example.chessgui.PieceColor;
-import com.example.chessgui.board.Board;
-import com.example.chessgui.board.Move;
-import com.example.chessgui.pieces.King;
-import com.example.chessgui.pieces.Piece;
+import com.example.engine.PieceColor;
+import com.example.engine.board.Board;
+import com.example.engine.board.Move;
+import com.example.engine.pieces.King;
+import com.example.engine.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.example.chessgui.Player;
+package com.example.engine.Player;
 
-import com.example.chessgui.board.Board;
-import com.example.chessgui.board.Move;
+import com.example.engine.board.Board;
+import com.example.engine.board.Move;
 
 public class MoveTransition {
     final Board transitionBoard;

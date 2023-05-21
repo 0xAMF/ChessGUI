@@ -1,4 +1,4 @@
-package com.example.chessgui.board;
+package com.example.engine.board;
 
 import java.util.Arrays;
 

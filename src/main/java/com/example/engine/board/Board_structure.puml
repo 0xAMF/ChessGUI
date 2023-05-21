@@ -1,0 +1,595 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.example.chessgui.board.Board",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1322970774 { 
+   	label=example
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_801955265 { 
+   	label=chessgui
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Bishop1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Bishop</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- isEightColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isFirstColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Bishop</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BlackPlayer826003491[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BlackPlayer</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># calculateKingCastels(playerLegals: List&lt;Move&gt;, opponentsLegals: List&lt;Move&gt;): List&lt;Move&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Board874641796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Board</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   blackPieces: List&lt;Piece&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   blackPlayer: BlackPlayer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   currentPlayer: Player [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gameBoard: List&lt;Tile&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   whitePieces: List&lt;Piece&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   whitePlayer: WhitePlayer [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ blackPlayer(): Player</TD></TR>
+<TR><TD ALIGN="LEFT" >- calculateActivePieces(gameBoard: List&lt;Tile&gt;, pieceColor: PieceColor): List&lt;Piece&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- calculateLegalMoves(pieces: List&lt;Piece&gt;): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- createGameBoard(builder: Builder): List&lt;Tile&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createStandardBoard(): Board</TD></TR>
+<TR><TD ALIGN="LEFT" >+ currentPlayer(): Player</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTile(tileCoordinate: int): Tile</TD></TR>
+<TR><TD ALIGN="LEFT" >+ whitePlayer(): Player</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BoardStructure874641796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BoardStructure</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- initColumn(columnNumber: int): boolean[]</TD></TR>
+<TR><TD ALIGN="LEFT" >- initRow(rowNumber: int): boolean[]</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isValidCoordinate(tileCoordinate: int): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Builder1611575772[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Builder</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   boardConfig: Map&lt;Integer, Piece&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nextMoveMaker: PieceColor [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ build(): Board</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removePiece(tileCoordinate: int): Builder</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setMoveMaker(nextMoveMaker: PieceColor): Builder</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setPiece(piece: Piece): Builder</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CastleMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CastleMove</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   castleRook: Rook [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   castleRookDestination: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   castleRookStart: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(): Board</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+King1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)King</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   isCastled: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   kingSideCastleCapable: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   queenSideCastleCapable: boolean [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- isEighthColumnExclusion(currentCandidate: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isFirstColumnExclusion(currentCandidate: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Piece</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+KingSideCastleMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)KingSideCastleMove</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Knight1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Knight</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- isEighthColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isFirstColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isSecondColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isSeventhColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Knight</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Move874641796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Move</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   board: Board [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   destinationCoordinate: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   movedPiece: Piece [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(): Board</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MoveTransition826003491[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MoveTransition</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   move: Move [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   moveStatus: MoveStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   transitionBoard: Board [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+NullMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NullMove</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(): Board</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Pawn1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Pawn</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Piece</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PawnAttackMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PawnAttackMove</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PawnJump52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PawnJump</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(): Board</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PawnMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PawnMove</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Piece1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Piece</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cachedHashCode: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   isFirstMove: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   pieceColor: PieceColor [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   piecePosition: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   pieceType: PieceType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- computeHashCode(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Piece</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Player826003491[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Player</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   board: Board [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   isInCheck: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   legalMoves: List&lt;Move&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   playerKing: King [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># calculateAttacksOnTile(piecePosition: int, moves: List&lt;Move&gt;): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" ># calculateKingCastels(playerLegals: List&lt;Move&gt;, opponentsLegals: List&lt;Move&gt;): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- establishKing(): King</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isMoveLegal(move: Move): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ makeMove(move: Move): MoveTransition</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Queen1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Queen</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- isEightColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isFirstColumnExclusion(currentPosition: int, candidateOffset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Queen</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+QueenSideCastleMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)QueenSideCastleMove</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Rook1739463783[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Rook</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcLegalMoves(board: Board): List&lt;Move&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >- isColumnExclusion(position: int, offset: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ movePiece(move: Move): Rook</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Tile874641796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Tile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   tileCoordinate: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- createPossibleEmptyTiles(): Map&lt;Integer, emptyTile&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createTile(tileCoordinate: int, piece: Piece): Tile</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+WhitePlayer826003491[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)WhitePlayer</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># calculateKingCastels(playerLegals: List&lt;Move&gt;, opponentsLegals: List&lt;Move&gt;): List&lt;Move&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+attackMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)attackMove</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   attackedPiece: Piece [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ execute(): Board</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+emptyTile874641796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)emptyTile</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+occupiedTile874641796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)occupiedTile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   occupyingPiece: Piece [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+pieceMove52314651[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)pieceMove</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+subgraph cluster_70939 { 
+   	label=GUI
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   BoardPane70939[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BoardPane</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   TileId: int[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   board: Board [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   boardButtons: Button[][] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tileCount: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ removePieceIcon(pane: GridPane, tile: Tile)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+test70939[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)test</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   BOARD_SIZE: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   TileId: int[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   board: Board [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   boardButtons: Button[][] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   builder: Builder [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   button: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   chessboard: GridPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   destinationTile: Tile [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fromTile: Tile [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   movedPiece: Piece [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   tileCount: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- getTileId(row: int, col: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removePieceIcon(node: Node, col: int, row: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ start(primaryStage: Stage)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Bishop1739463783 -> Board874641796[label="calcLegalMoves() -> getTile()"];
+Board874641796 -> BlackPlayer826003491[label="blackPlayer
+[0..1]"];
+Board874641796 -> Piece1739463783[label="blackPieces
+[0..*]"];
+Board874641796 -> Piece1739463783[label="whitePieces
+[0..*]"];
+Board874641796 -> Player826003491[label="currentPlayer
+[0..1]"];
+Board874641796 -> Tile874641796[label="gameBoard
+[0..*]"];
+Board874641796 -> WhitePlayer826003491[label="whitePlayer
+[0..1]"];
+BoardPane70939 -> Board874641796[label="board
+[0..1]"];
+Builder1611575772 -> Piece1739463783[label="boardConfig
+[0..*]"];
+CastleMove52314651 -> KingSideCastleMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+CastleMove52314651 -> QueenSideCastleMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+Knight1739463783 -> Board874641796[label="calcLegalMoves() -> getTile()"];
+Move874641796 -> Board874641796[label="board
+[0..1]"];
+Move874641796 -> CastleMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+Move874641796 -> NullMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+Move874641796 -> PawnJump52314651[arrowhead=none, arrowtail=empty, dir=both];
+Move874641796 -> PawnMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+Move874641796 -> attackMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+Move874641796 -> pieceMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+MoveTransition826003491 -> Board874641796[label="transitionBoard
+[0..1]"];
+MoveTransition826003491 -> Move874641796[label="move
+[0..1]"];
+Pawn1739463783 -> BoardStructure874641796[label="calcLegalMoves() -> isValidCoordinate()"];
+Piece1739463783 -> Bishop1739463783[arrowhead=none, arrowtail=empty, dir=both];
+Piece1739463783 -> King1739463783[arrowhead=none, arrowtail=empty, dir=both];
+Piece1739463783 -> Knight1739463783[arrowhead=none, arrowtail=empty, dir=both];
+Piece1739463783 -> Pawn1739463783[arrowhead=none, arrowtail=empty, dir=both];
+Piece1739463783 -> Queen1739463783[arrowhead=none, arrowtail=empty, dir=both];
+Piece1739463783 -> Rook1739463783[arrowhead=none, arrowtail=empty, dir=both];
+Player826003491 -> BlackPlayer826003491[arrowhead=none, arrowtail=empty, dir=both];
+Player826003491 -> Board874641796[label="board
+[0..1]"];
+Player826003491 -> King1739463783[label="playerKing
+[0..1]"];
+Player826003491 -> Move874641796[label="legalMoves
+[0..*]"];
+Player826003491 -> WhitePlayer826003491[arrowhead=none, arrowtail=empty, dir=both];
+Queen1739463783 -> Board874641796[label="calcLegalMoves() -> getTile()"];
+Rook1739463783 -> Board874641796[label="calcLegalMoves() -> getTile()"];
+Tile874641796 -> emptyTile874641796[arrowhead=none, arrowtail=empty, dir=both];
+Tile874641796 -> occupiedTile874641796[arrowhead=none, arrowtail=empty, dir=both];
+attackMove52314651 -> PawnAttackMove52314651[arrowhead=none, arrowtail=empty, dir=both];
+test70939 -> Board874641796[label="board
+[0..1]"];
+    
+}
+@enduml

@@ -1,10 +1,9 @@
-package com.example.chessgui.pieces;
+package com.example.engine.pieces;
 
-import com.example.chessgui.PieceColor;
-import com.example.chessgui.board.Board;
-import com.example.chessgui.board.BoardStructure;
-import com.example.chessgui.board.Move;
-import javafx.scene.image.Image;
+import com.example.engine.PieceColor;
+import com.example.engine.board.Board;
+import com.example.engine.board.BoardStructure;
+import com.example.engine.board.Move;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -69,7 +68,6 @@ public class Pawn extends Piece {
         return legalMoves;
     }
 
-    //5555555555555555555rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaaaaaaaaaa
     @Override
     public Piece movePiece(Move move) {
         return new Pawn(move.getMovedPiece().getPieceColor(), move.getDestinationCoordinate(), false);

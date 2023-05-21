@@ -1,4 +1,4 @@
-package com.example.chessgui.Player;
+package com.example.engine.Player;
 
 public enum MoveStatus {
     DONE {

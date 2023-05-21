@@ -1,8 +1,8 @@
-package com.example.chessgui;
+package com.example.engine;
 
-import com.example.chessgui.Player.BlackPlayer;
-import com.example.chessgui.Player.Player;
-import com.example.chessgui.Player.WhitePlayer;
+import com.example.engine.Player.BlackPlayer;
+import com.example.engine.Player.Player;
+import com.example.engine.Player.WhitePlayer;
 
 public enum PieceColor {
     WHITE {

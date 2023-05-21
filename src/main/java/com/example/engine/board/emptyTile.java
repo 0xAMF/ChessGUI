@@ -1,6 +1,6 @@
-package com.example.chessgui.board;
+package com.example.engine.board;
 
-import com.example.chessgui.pieces.Piece;
+import com.example.engine.pieces.Piece;
 
 public class emptyTile extends Tile {
 

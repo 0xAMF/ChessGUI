@@ -1,11 +1,11 @@
-package com.example.chessgui.board;
+package com.example.engine.board;
 
-import com.example.chessgui.PieceColor;
-import com.example.chessgui.Player.BlackPlayer;
-import com.example.chessgui.Player.Player;
-import com.example.chessgui.Player.WhitePlayer;
-import com.example.chessgui.pieces.*;
-import com.example.chessgui.pieces.Pawn;
+import com.example.engine.PieceColor;
+import com.example.engine.Player.BlackPlayer;
+import com.example.engine.Player.Player;
+import com.example.engine.Player.WhitePlayer;
+import com.example.engine.pieces.*;
+import com.example.engine.pieces.Pawn;
 
 import java.util.*;
 

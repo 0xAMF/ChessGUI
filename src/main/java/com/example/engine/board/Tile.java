@@ -1,5 +1,5 @@
-package com.example.chessgui.board;
-import com.example.chessgui.pieces.Piece;
+package com.example.engine.board;
+import com.example.engine.pieces.Piece;
 
 import java.util.HashMap;
 import java.util.Map;
