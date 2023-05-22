@@ -160,10 +160,5 @@ public class Board {
             this.boardConfig.put(tileCoordinate, null);
             return this;
         }
-
-        ///FOR NOW
-        void setEnpassantPawn(Pawn movedPawn) {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
     }
 }

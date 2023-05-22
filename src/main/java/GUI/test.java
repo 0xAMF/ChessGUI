@@ -3,6 +3,7 @@ package GUI;
 
 
 import com.example.engine.board.Board;
+import com.example.engine.board.Move;
 import com.example.engine.board.Tile;
 import com.example.engine.pieces.Piece;
 import javafx.application.Application;
@@ -30,7 +31,6 @@ public class test extends Application {
     int[] TileId = new int[65];
     int tileCount = 0;
 
-    Board board = Board.createStandardBoard();
     GridPane chessboard = new GridPane();
     ChessGame game;
 
@@ -40,7 +40,7 @@ public class test extends Application {
         game = new ChessGame();
 
         chessboard = createBoardGUI();
-        setBoardPieces(board);
+        setBoardPieces(game.getBoard());
 
         Scene scene = new Scene(chessboard, 800, 800);
         primaryStage.setTitle("Very Bad Chess");
@@ -76,9 +76,10 @@ public class test extends Application {
         ImageView pieceIcon;
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                Tile tile = game.getBoard().getTile(tileCount);
+                Tile tile = board.getTile(tileCount);
                 pieceIcon = null;
                 if (tile.isTileOccupied()) {
+                    //System.out.println(tile.getPiece().getPieceColor().toString() + " " + tile.getPiece().toString() + " on board");
                     pieceIcon = tile.getPiece().getPieceIcon();
                 }
                 tileCount++;
@@ -98,7 +99,7 @@ public class test extends Application {
                 fromTile = null;
             }
             else {
-                System.out.println(movedPiece.toString() + " is Selected");
+                System.out.println(movedPiece.getPieceColor().toString() + " " + movedPiece.toString() + " is Selected");
             }
         }
 
@@ -109,7 +110,8 @@ public class test extends Application {
 
                 boolean moveSuccess = game.makeMove(fromTile, destinationTile);
                 if (moveSuccess) {
-                    System.out.println(movedPiece.toString() + " has moved");
+                    System.out.println(movedPiece.getPieceColor().toString() + " " + movedPiece.toString() + " has moved");
+
                     setBoardPieces(game.getBoard());
                     if (game.isGameOver()) {
                         /*TODO handle game over event*/
@@ -120,7 +122,6 @@ public class test extends Application {
             }
         }
     }
-
 
 
     //convert rows and columns into a single number that represents TileId

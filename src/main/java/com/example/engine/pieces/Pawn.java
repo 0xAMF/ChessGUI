@@ -29,7 +29,6 @@ public class Pawn extends Piece {
             }
 
             if (candidateCoordinateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
-                // TODO more work to do here(deal with promotions )!!!!!!!!!!!!
                 legalMoves.add(new Move.pieceMove(board, this, candidateDestinationCoordinate));
             } else if (candidateCoordinateOffset == 16 && this.isFirstMove() &&
                     (BoardStructure.SECOND_ROW[this.piecePosition] && this.getPieceColor().isBlack()) ||
@@ -46,7 +45,6 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceColor != pieceOnCandidate.getPieceColor()) {
-                        // TODO more work to do here(deal with promotions )!!!!!!!!!!!!
                         legalMoves.add(new Move.pieceMove(board, this, candidateDestinationCoordinate));
                     }
                 }
@@ -57,14 +55,11 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceColor != pieceOnCandidate.getPieceColor()) {
-                        // TODO more work to do here(deal with promotions )!!!!!!!!!!!!
                         legalMoves.add(new Move.pieceMove(board, this, candidateDestinationCoordinate));
                     }
                 }
             }
         }
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
         return legalMoves;
     }
 

@@ -83,7 +83,6 @@ public final class King extends Piece {
                 }
             }
         }
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
         return legalMoves;
     }
 
@@ -91,15 +90,6 @@ public final class King extends Piece {
     public String toString() {
         return this.pieceType.toString();
     }
-
-    /*
-     * @Override
-     * public King movePiece(final Move move) {
-     * return new King(this.pieceAlliance, move.getDestinationCoordinate(), false,
-     * move.isCastlingMove(), false,
-     * false);
-     * }
-     */
 
     @Override
     public boolean equals(final Object other) {
@@ -137,7 +127,7 @@ public final class King extends Piece {
 
     @Override
     public Piece movePiece(Move move) {
-        return new King(move.getMovedPiece().pieceColor, move.getDestinationCoordinate(), false, false);
+        return new King(move.getMovedPiece().getPieceColor(), move.getDestinationCoordinate(), false, false);
     }
 
     @Override

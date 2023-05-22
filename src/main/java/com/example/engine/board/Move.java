@@ -16,6 +16,10 @@ public abstract class Move {
         this.movedPiece = movedPiece;
         this.destinationCoordinate = destinationCoordinate;
     }
+
+    public int getMoveDestinationCoordinate() {
+        return this.destinationCoordinate;
+    }
     
     @Override
     public int hashCode(){
@@ -64,16 +68,18 @@ public abstract class Move {
    
     public Board execute() {
             final Board.Builder builder = new Board.Builder();
-            //TODO
-            for(final Piece piece : this.board.currentPlayer().getActivePieces()){
-                if(!this.movedPiece.equals(piece)){
+            for(final Piece piece : this.board.currentPlayer().getActivePieces()) {
+                if(!this.movedPiece.equals(piece)) {
                     builder.setPiece(piece);
                 }
             }
             for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()){
+                if(!this.movedPiece.equals(piece)){
                     builder.setPiece(piece);
+                }
+                // builder.setPiece(piece);
             }
-            //move the moved piece!!!!
+            //move the moved piece
             builder.setPiece(this.movedPiece.movePiece(this));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getPlayerColor());
             return builder.build();
@@ -151,12 +157,9 @@ public abstract class Move {
             }
             final Pawn movedPawn = (Pawn)this.movedPiece.movePiece(this);
             builder.setPiece(movedPawn);
-            //FOR NOW
-            //builder.setEnpassantPawn(movedPawn);
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getPlayerColor());
             return builder.build();
         }
-        
     }
     
     static abstract class CastleMove extends Move{

@@ -4,6 +4,9 @@ import com.example.engine.Player.MoveTransition;
 import com.example.engine.board.Board;
 import com.example.engine.board.Move;
 import com.example.engine.board.Tile;
+
+import java.util.List;
+
 public class ChessGame {
     private Board board;
 
@@ -18,7 +21,9 @@ public class ChessGame {
         if (transition.getMoveStatus().isDone()) {
             this.board = transition.getBoardAfterTransition();
             String currentPlayer = this.board.currentPlayer().getPlayerColor().toString();
+            String pieces = this.board.currentPlayer().getActivePieces().toString();
             System.out.println(currentPlayer + " To move");
+            System.out.println(pieces);
             return true;
         }
         return false;
