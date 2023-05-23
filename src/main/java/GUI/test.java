@@ -2,11 +2,13 @@ package GUI;
 
 
 
+import com.example.engine.PieceColor;
 import com.example.engine.board.Board;
 import com.example.engine.board.Move;
 import com.example.engine.board.Tile;
 import com.example.engine.pieces.Piece;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -118,18 +120,7 @@ public class test extends Application {
                 System.out.println(fromTile.getTileCoordinate() + " ============> " + destinationTile.getTileCoordinate());
                 System.out.println("Move Success ============> " + moveSuccess);
                 if (moveSuccess) {
-                    HBox hbox = new HBox();
-                    Label label = new Label(game.getBoard().currentPlayer().getPlayerColor().toString() + " To move");
-                    label.setFont(Font.font(24));
-                    label.setBackground(Background.fill(Color.GRAY));
-                    label.setBorder(Border.stroke(Color.BLACK));
-                    hbox.getChildren().add(label);
-
-                    Label inCheckLabel = new Label(game.getBoard().currentPlayer().isInCheck() + " ");
-                    hbox.getChildren().add(inCheckLabel);
-                    hbox.setAlignment(Pos.CENTER);
-                    borderPane.setBottom(hbox);
-                    
+                    showCurrentPlayer();
                     System.out.println(movedPiece.getPieceColor().toString() + " " + movedPiece.toString() + " has moved");
                     setBoardPieces(game.getBoard());
                     if (game.isGameOver()) {
@@ -141,6 +132,41 @@ public class test extends Application {
             }
         }
     }
+
+    private void showCurrentPlayer() {
+        boolean isInCheck = game.getBoard().currentPlayer().isInCheck();
+        String currentPlayer = game.getBoard().currentPlayer().getPlayerColor().toString();
+        HBox hbox = new HBox();
+        //Current player label
+        Label label = new Label( currentPlayer+ " To move");
+        label.setFont(Font.font(24));
+        label.setBackground(Background.fill(Color.GRAY));
+        label.setBorder(Border.stroke(Color.BLACK));
+
+        hbox.getChildren().addAll(label);
+        //in Check indication
+        Label inCheckLabel;
+        if (isInCheck && game.getBoard().currentPlayer().getPlayerColor() == PieceColor.WHITE) {
+            inCheckLabel = new Label(" WHITE IS IN CHECK");
+            hbox.getChildren().add(inCheckLabel);
+        }
+        else if (isInCheck && game.getBoard().currentPlayer().getPlayerColor() == PieceColor.BLACK) {
+            inCheckLabel = new Label(" BLACK IS IN CHECK");
+            hbox.getChildren().add(inCheckLabel);
+        }
+        else {
+            inCheckLabel = new Label(" ");
+        }
+        inCheckLabel.setFont(Font.font(24));
+        inCheckLabel.setBackground(Background.fill(Color.RED));
+        inCheckLabel.setBorder(Border.stroke(Color.BLACK));
+
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setPadding(new Insets(10));
+        borderPane.setBottom(hbox);
+    }
+
+
 
 
     //convert rows and columns into a single number that represents TileId
