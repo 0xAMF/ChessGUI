@@ -14,7 +14,7 @@ public class WhitePlayer extends Player{
     public WhitePlayer(final Board board,
                        final List<Move> whiteStandardLegalMoves,
                        final List<Move> blackStandardLegalMoves) {
-        super(board, blackStandardLegalMoves, whiteStandardLegalMoves);
+        super(board, whiteStandardLegalMoves, blackStandardLegalMoves);
     }
 
     @Override

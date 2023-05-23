@@ -21,8 +21,7 @@ public class Pawn extends Piece {
         final List<Move> legalMoves = new ArrayList<>();
 
         for (final int candidateCoordinateOffset : CANDIDATE_MOVE_COORDINATE) {
-            final int candidateDestinationCoordinate = this.piecePosition
-                    + (this.pieceColor.getDirection() * candidateCoordinateOffset);
+            final int candidateDestinationCoordinate = this.piecePosition + (this.pieceColor.getDirection() * candidateCoordinateOffset);
 
             if (!BoardStructure.isValidCoordinate(candidateDestinationCoordinate)) {
                 continue;

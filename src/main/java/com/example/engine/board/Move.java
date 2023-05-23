@@ -16,10 +16,6 @@ public abstract class Move {
         this.movedPiece = movedPiece;
         this.destinationCoordinate = destinationCoordinate;
     }
-
-    public int getMoveDestinationCoordinate() {
-        return this.destinationCoordinate;
-    }
     
     @Override
     public int hashCode(){
@@ -73,8 +69,8 @@ public abstract class Move {
                     builder.setPiece(piece);
                 }
             }
-            for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()){
-                if(!this.movedPiece.equals(piece)){
+            for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()) {
+                if(!this.movedPiece.equals(piece)) {
                     builder.setPiece(piece);
                 }
                 // builder.setPiece(piece);
@@ -127,7 +123,7 @@ public abstract class Move {
         }
     }
     
-    public static final class PawnMove extends Move{
+    public static final class PawnMove extends Move {
         public PawnMove(final Board board, final Piece movedPiece, final int destinationCoordinate){
             super(board, movedPiece, destinationCoordinate);
         }
@@ -246,15 +242,14 @@ public abstract class Move {
         }
     }
     
-    public static class MoveFactory{
+    public static class MoveFactory {
         public static Move createMove(final Board board, final int currentCoordinate, final int destinationCoordinate){
-            for(final Move move : board.getAllLegalMoves()){
-                if(move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate){
+            for(final Move move : board.getAllLegalMoves()) {
+                if(move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate) {
                     return move;
                 }
             }
             return NULL_MOVE;
         }
     }
-
 }

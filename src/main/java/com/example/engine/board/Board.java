@@ -6,7 +6,6 @@ import com.example.engine.Player.Player;
 import com.example.engine.Player.WhitePlayer;
 import com.example.engine.pieces.*;
 import com.example.engine.pieces.Pawn;
-
 import java.util.*;
 
 public class Board {
@@ -17,16 +16,18 @@ public class Board {
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
 
-    private Board(final Builder builder){
+    private Board(final Builder builder) {
         this.gameBoard = createGameBoard(builder);
-        this.whitePieces = calculateActivePieces(this.gameBoard, PieceColor.WHITE);
-        this.blackPieces= calculateActivePieces(this.gameBoard, PieceColor.BLACK);
 
-        List<Move> whiteStandardLegalMoves = calculateLegalMoves(this.whitePieces);
-        List<Move> blackStandardLegalMoves = calculateLegalMoves(this.blackPieces);
+        this.whitePieces = calculateActivePieces(this.gameBoard, PieceColor.WHITE);
+        this.blackPieces = calculateActivePieces(this.gameBoard, PieceColor.BLACK);
+
+        List<Move> whiteStandardLegalMoves = calculateLegalMoves(this.whitePieces);    /*<=== the right method*/
+        List<Move> blackStandardLegalMoves = calculateLegalMoves(this.blackPieces);   /*<=== the right method*/
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+
         this.currentPlayer = builder.nextMoveMaker.choosePlayer(this.whitePlayer, this.blackPlayer);
     }
 
@@ -40,11 +41,27 @@ public class Board {
 
     private List<Move> calculateLegalMoves(List<Piece> pieces) {
         List<Move> legalMoves = new ArrayList<>();
-        for (Piece piece : pieces){
-            legalMoves.addAll(piece.calcLegalMoves(this));
+        List<Move> onePiece;
+        for (Piece piece : pieces) {
+            System.out.println("Current piece is " + piece.getPieceColor().toString() + " " + piece.getPieceType().toString() + " at coordinate " + piece.getPiecePosition());
+            onePiece = piece.calcLegalMoves(this);
+
+            /**/
+            for (Move moves : onePiece) {
+                System.out.println(moves.getCurrentCoordinate() + " =====> " + moves.getDestinationCoordinate() + " Is a possible move");
+            }
+            /**/
+
+            legalMoves.addAll(onePiece);
         }
+
+        for (Move move : legalMoves) {
+            System.out.println(move.getCurrentCoordinate() + " ===(INLM)==> " + move.getDestinationCoordinate() + " Is a possible move");
+        }
+
         return legalMoves;
     }
+
 
     private List<Piece> calculateActivePieces(List<Tile> gameBoard, PieceColor pieceColor){
         final List<Piece> activePieces = new ArrayList<>();
@@ -65,12 +82,11 @@ public class Board {
 
     private List<Tile> createGameBoard(final Builder builder) {
         Tile[] tiles = new Tile[BoardStructure.NUM_OF_TILES];
-        for (int i = 0; i < BoardStructure.NUM_OF_TILES; i++){
+        for (int i = 0; i < BoardStructure.NUM_OF_TILES; i++) {
             tiles[i] = Tile.createTile(i, builder.boardConfig.get(i));
         }
         return Arrays.asList(tiles);
     }
-
 
     public static Board createStandardBoard() {
         final Builder builder = new Builder();
@@ -156,9 +172,5 @@ public class Board {
             return new Board(this);
         }
 
-        public Builder removePiece(int tileCoordinate) {
-            this.boardConfig.put(tileCoordinate, null);
-            return this;
-        }
     }
 }

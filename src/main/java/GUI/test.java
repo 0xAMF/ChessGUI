@@ -91,7 +91,7 @@ public class test extends Application {
     private void handleTileClicked(int row, int col, MouseEvent event) {
         if (event.getButton() == MouseButton.SECONDARY) {
             fromTile = game.getBoard().getTile(getTileId(row, col));
-            System.out.println("\nfromTile ID: =========> " + fromTile.getTileCoordinate());
+            System.out.println("\nSource Tile ID: =========> " + fromTile.getTileCoordinate());
             movedPiece = fromTile.getPiece();
 
             if (movedPiece == null) {
@@ -109,9 +109,10 @@ public class test extends Application {
                 System.out.println("\nDestinationTile ID: =========> " + destinationTile.getTileCoordinate());
 
                 boolean moveSuccess = game.makeMove(fromTile, destinationTile);
+                System.out.println(fromTile.getTileCoordinate() + " ============> " + destinationTile.getTileCoordinate());
+                System.out.println("Move Success ============> " + moveSuccess);
                 if (moveSuccess) {
                     System.out.println(movedPiece.getPieceColor().toString() + " " + movedPiece.toString() + " has moved");
-
                     setBoardPieces(game.getBoard());
                     if (game.isGameOver()) {
                         /*TODO handle game over event*/
