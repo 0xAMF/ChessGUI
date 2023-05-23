@@ -30,9 +30,6 @@ public class ChessGame {
         List<Move> BoardLegalMoves = this.board.getAllLegalMoves();
         List<Move> blackLegalMoves = this.board.blackPlayer().getLegalMoves();
 
-        /*for (Move legalMoves : BoardLegalMoves) {
-            System.out.println("Board legal move: " + legalMoves.getCurrentCoordinate() + " ====> " + legalMoves.getDestinationCoordinate());
-        }*/
         System.out.println();
         for (Move legalMoves : whiteLegalMoves) {
             System.out.println("white legal move: " + legalMoves.getCurrentCoordinate() + " ====> " + legalMoves.getDestinationCoordinate());
@@ -57,13 +54,15 @@ public class ChessGame {
             String pieces = this.board.currentPlayer().getActivePieces().toString();
 
             System.out.println(currentPlayer + " To move");
-            //Label label = new Label(currentPlayer + "To move");
-
             System.out.println(pieces);
 
             return true;
         }
         return false;
+    }
+
+    public void setGameBoard(Board board) {
+        this.board = board;
     }
 
     public boolean isGameOver() {

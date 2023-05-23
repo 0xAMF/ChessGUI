@@ -87,7 +87,6 @@ public class test extends Application {
                 Tile tile = board.getTile(tileCount);
                 pieceIcon = null;
                 if (tile.isTileOccupied()) {
-                    //System.out.println(tile.getPiece().getPieceColor().toString() + " " + tile.getPiece().toString() + " on board");
                     pieceIcon = tile.getPiece().getPieceIcon();
                 }
                 tileCount++;
@@ -124,13 +123,51 @@ public class test extends Application {
                     System.out.println(movedPiece.getPieceColor().toString() + " " + movedPiece.toString() + " has moved");
                     setBoardPieces(game.getBoard());
                     if (game.isGameOver()) {
-                        /*TODO handle game over event*/
-                        //displayGameOver();
+                        displayGameOver();
                     }
                     fromTile = null;
                 }
             }
         }
+    }
+
+    private void displayGameOver() {
+        Stage LoserStage = new Stage();
+        Scene LoserScene = null;
+        Label label = null;
+        BorderPane LoserPane = new BorderPane();
+        HBox hbox = new HBox();
+        Button LoserButton = new Button("PLAY AGAIN");
+        LoserButton.setPrefSize(200, 100);
+        if (game.getBoard().currentPlayer().getPlayerColor() == PieceColor.WHITE) {
+            label = new Label("Check Mate, WHITE LOST!");
+            label.setFont(Font.font(47));
+            label.setBackground(Background.fill(Color.GRAY));
+
+            LoserPane.setCenter(label);
+            hbox.getChildren().add(LoserButton);
+            hbox.setAlignment(Pos.CENTER);
+            LoserPane.setBottom(hbox);
+            LoserScene = new Scene(LoserPane, 750, 400);
+        }
+        else if (game.getBoard().currentPlayer().getPlayerColor() == PieceColor.BLACK) {
+            label = new Label("Check Mate, BLACK LOST!");
+            label.setFont(Font.font(47));
+            label.setBackground(Background.fill(Color.GRAY));
+
+            LoserPane.setCenter(label);
+            hbox.getChildren().add(LoserButton);
+            hbox.setAlignment(Pos.CENTER);
+            LoserPane.setBottom(hbox);
+            LoserScene = new Scene(LoserPane, 750, 400);
+        }
+        LoserButton.setOnAction(e -> {
+            LoserStage.close();
+            game.setGameBoard(Board.createStandardBoard());
+            setBoardPieces(game.getBoard());
+        });
+        LoserStage.setScene(LoserScene);
+        LoserStage.show();
     }
 
     private void showCurrentPlayer() {
@@ -146,11 +183,11 @@ public class test extends Application {
         hbox.getChildren().addAll(label);
         //in Check indication
         Label inCheckLabel;
-        if (isInCheck && game.getBoard().currentPlayer().getPlayerColor() == PieceColor.WHITE) {
+        if (isInCheck && game.getBoard().currentPlayer().getPlayerColor() == PieceColor.WHITE && !game.isGameOver()) {
             inCheckLabel = new Label(" WHITE IS IN CHECK");
             hbox.getChildren().add(inCheckLabel);
         }
-        else if (isInCheck && game.getBoard().currentPlayer().getPlayerColor() == PieceColor.BLACK) {
+        else if (isInCheck && game.getBoard().currentPlayer().getPlayerColor() == PieceColor.BLACK && !game.isGameOver()) {
             inCheckLabel = new Label(" BLACK IS IN CHECK");
             hbox.getChildren().add(inCheckLabel);
         }
