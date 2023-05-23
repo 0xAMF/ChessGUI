@@ -4,6 +4,7 @@ import com.example.engine.Player.MoveTransition;
 import com.example.engine.board.Board;
 import com.example.engine.board.Move;
 import com.example.engine.board.Tile;
+import javafx.scene.control.Label;
 
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class ChessGame {
             String pieces = this.board.currentPlayer().getActivePieces().toString();
 
             System.out.println(currentPlayer + " To move");
+            //Label label = new Label(currentPlayer + "To move");
+
             System.out.println(pieces);
 
             return true;

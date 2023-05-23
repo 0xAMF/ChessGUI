@@ -10,11 +10,14 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -32,6 +35,7 @@ public class test extends Application {
     int tileCount = 0;
 
     GridPane chessboard = new GridPane();
+    BorderPane borderPane = new BorderPane();
     ChessGame game;
 
     @Override
@@ -42,7 +46,9 @@ public class test extends Application {
         chessboard = createBoardGUI();
         setBoardPieces(game.getBoard());
 
-        Scene scene = new Scene(chessboard, 800, 800);
+        borderPane.setCenter(chessboard);
+
+        Scene scene = new Scene(borderPane, 800, 800);
         primaryStage.setTitle("Very Bad Chess");
         primaryStage.getIcons().add(new Image("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\icon.jpeg"));
         primaryStage.setScene(scene);
@@ -112,6 +118,18 @@ public class test extends Application {
                 System.out.println(fromTile.getTileCoordinate() + " ============> " + destinationTile.getTileCoordinate());
                 System.out.println("Move Success ============> " + moveSuccess);
                 if (moveSuccess) {
+                    HBox hbox = new HBox();
+                    Label label = new Label(game.getBoard().currentPlayer().getPlayerColor().toString() + " To move");
+                    label.setFont(Font.font(24));
+                    label.setBackground(Background.fill(Color.GRAY));
+                    label.setBorder(Border.stroke(Color.BLACK));
+                    hbox.getChildren().add(label);
+
+                    Label inCheckLabel = new Label(game.getBoard().currentPlayer().isInCheck() + " ");
+                    hbox.getChildren().add(inCheckLabel);
+                    hbox.setAlignment(Pos.CENTER);
+                    borderPane.setBottom(hbox);
+                    
                     System.out.println(movedPiece.getPieceColor().toString() + " " + movedPiece.toString() + " has moved");
                     setBoardPieces(game.getBoard());
                     if (game.isGameOver()) {

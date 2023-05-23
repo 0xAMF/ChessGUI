@@ -70,10 +70,7 @@ public abstract class Move {
                 }
             }
             for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()) {
-                if(!this.movedPiece.equals(piece)) {
-                    builder.setPiece(piece);
-                }
-                // builder.setPiece(piece);
+                builder.setPiece(piece);
             }
             //move the moved piece
             builder.setPiece(this.movedPiece.movePiece(this));

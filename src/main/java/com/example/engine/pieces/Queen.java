@@ -40,16 +40,14 @@ public class Queen extends Piece {
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final PieceColor piece_color = pieceAtDestination.getPieceColor();
                         if (this.pieceColor != piece_color) {
-                            legalMoves.add(new Move.attackMove(board, pieceAtDestination,
-                                    candidateDestinationCoordinate, pieceAtDestination));
+                            //legalMoves.add(new Move.attackMove(board, pieceAtDestination, candidateDestinationCoordinate, pieceAtDestination));
+                            legalMoves.add(new Move.pieceMove(board, this, candidateDestinationCoordinate));
                         }
                         break;
                     }
                 }
             }
         }
-        // throw new UnsupportedOperationException("Not supported yet."); //To change
-        // body of generated methods, choose Tools | Templates.
         return legalMoves;
     }
     
