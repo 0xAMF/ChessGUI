@@ -4,8 +4,11 @@ import com.example.engine.PieceColor;
 import com.example.engine.board.Board;
 import com.example.engine.board.BoardStructure;
 import com.example.engine.board.Move;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,12 +71,14 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public ImageView getPieceIcon() {
+    public ImageView getPieceIcon() throws FileNotFoundException {
         if (this.getPieceColor() == PieceColor.BLACK) {
-            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\blackPawn.png");
+            Image blackPawn = new Image(new FileInputStream("PieceIcon/blackPawn.png"));
+            return new ImageView(blackPawn);
         }
         else {
-            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\whitePawn.png");
+            Image whitePawn = new Image(new FileInputStream("PieceIcon/whitePawn.png"));
+            return new ImageView(whitePawn);
         }
     }
 

@@ -5,6 +5,7 @@ import com.example.engine.board.Board;
 import com.example.engine.board.Move;
 import javafx.scene.image.ImageView;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public abstract class Piece {
@@ -69,7 +70,7 @@ public abstract class Piece {
     
     public abstract Piece movePiece(Move move);
 
-    public abstract ImageView getPieceIcon();
+    public abstract ImageView getPieceIcon() throws FileNotFoundException;
 
     public enum PieceType {
         PAWN("Pawn") {

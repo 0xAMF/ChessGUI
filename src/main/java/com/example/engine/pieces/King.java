@@ -5,8 +5,11 @@ import com.example.engine.board.Board;
 import com.example.engine.board.BoardStructure;
 import com.example.engine.board.Move;
 import com.example.engine.board.Tile;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,12 +134,14 @@ public final class King extends Piece {
     }
 
     @Override
-    public ImageView getPieceIcon() {
+    public ImageView getPieceIcon() throws FileNotFoundException {
         if (this.getPieceColor() == PieceColor.BLACK) {
-            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\blackKing.png");
+            Image blackKing = new Image(new FileInputStream("PieceIcon/blackKing.png"));
+            return new ImageView(blackKing);
         }
         else {
-            return new ImageView("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\whiteKing.png");
+            Image whiteKing = new Image(new FileInputStream("PieceIcon/whiteKing.png"));
+            return new ImageView(whiteKing);
         }
     }
 

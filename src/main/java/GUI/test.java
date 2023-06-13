@@ -4,7 +4,6 @@ package GUI;
 
 import com.example.engine.PieceColor;
 import com.example.engine.board.Board;
-import com.example.engine.board.Move;
 import com.example.engine.board.Tile;
 import com.example.engine.pieces.Piece;
 import javafx.application.Application;
@@ -22,6 +21,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class test extends Application {
@@ -52,7 +53,7 @@ public class test extends Application {
 
         Scene scene = new Scene(borderPane, 800, 800);
         primaryStage.setTitle("Very Bad Chess");
-        primaryStage.getIcons().add(new Image("C:\\Users\\Ahmed\\Desktop\\Tessst\\ChessGUI\\src\\main\\java\\PieceIcon\\icon.jpeg"));
+        primaryStage.getIcons().add(new Image(new FileInputStream("PieceIcon/icon.jpeg")));
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -71,7 +72,13 @@ public class test extends Application {
                 tileButton.setStyle("-fx-background-color: " + ((row + col) % 2 == 0 ? "white" : "gray"));
                 int finalRow = row;
                 int finalCol = col;
-                tileButton.setOnMouseClicked(event -> handleTileClicked(finalRow, finalCol, event));
+                tileButton.setOnMouseClicked(event -> {
+                    try {
+                        handleTileClicked(finalRow, finalCol, event);
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 boardButtons[row][col] = tileButton;
                 chessboard.add(tileButton, col, row);
             }
@@ -79,7 +86,7 @@ public class test extends Application {
         return chessboard;
     }
 
-    public void setBoardPieces(Board board) {
+    public void setBoardPieces(Board board) throws FileNotFoundException {
         tileCount = 0;
         ImageView pieceIcon;
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -95,7 +102,7 @@ public class test extends Application {
         }
     }
 
-    private void handleTileClicked(int row, int col, MouseEvent event) {
+    private void handleTileClicked(int row, int col, MouseEvent event) throws FileNotFoundException {
         if (event.getButton() == MouseButton.SECONDARY) {
             fromTile = game.getBoard().getTile(getTileId(row, col));
             System.out.println("\nSource Tile ID: =========> " + fromTile.getTileCoordinate());
@@ -164,7 +171,11 @@ public class test extends Application {
         LoserButton.setOnAction(e -> {
             LoserStage.close();
             game.setGameBoard(Board.createStandardBoard());
-            setBoardPieces(game.getBoard());
+            try {
+                setBoardPieces(game.getBoard());
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         LoserStage.setScene(LoserScene);
         LoserStage.show();
